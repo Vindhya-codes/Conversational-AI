@@ -2,23 +2,32 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 
-import { connectDB } from "./config/db";
+import { connectDB } from "./config/db.ts";
+import chatRoute from "./routes/chat.ts";
 
 dotenv.config();
 
-connectDB();
+const startServer = async () => {
 
-const app = express();
+  await connectDB();
 
-app.use(cors());
-app.use(express.json());
+  const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Backend is running successfully 🚀");
-});
+  app.use(cors());
+  app.use(express.json());
 
-const PORT = process.env.PORT || 5000;
+  app.use("/chat", chatRoute);
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+  app.get("/", (req, res) => {
+    res.send("Backend is running successfully 🚀");
+  });
+
+  const PORT = process.env.PORT || 5000;
+
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+
+};
+
+startServer();
