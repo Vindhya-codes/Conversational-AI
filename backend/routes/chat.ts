@@ -35,13 +35,14 @@ router.post("/", async (req, res) => {
 
       //console.log("Completion response:", completion);
 
-    const reply =
-      completion.choices[0].message.content || "No response generated";
+    const reply = completion.choices?.[0]?.message?.content ?? "No response generated";
 
-    await Chat.create({
-      userMessage: message,
-      aiResponse: reply
-    });
+    if (reply) {
+  await Chat.create({
+    userMessage: message,
+    aiResponse: reply
+  });
+}
 
     res.json({
       reply
