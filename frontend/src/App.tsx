@@ -125,24 +125,26 @@ function App() {
         />
 
         <button
-          onClick={
-            sendMessage
-          }
-          style={{
-            width: "100%",
-            padding:
-              "12px",
-            background:
-              "#2c3e50",
-            color: "white",
-            border: "none",
-            borderRadius:
-              "8px",
-            cursor: "pointer"
+        onClick={sendMessage}
+        disabled={loading}
+        style={{
+          width: "100%",
+          padding: "12px",
+          background: loading
+          ? "#95a5a6"
+          : "#2c3e50",
+          color: "white",
+          border: "none",
+          borderRadius: "8px",
+          cursor: loading
+          ? "not-allowed"
+          : "pointer"
           }}
-        >
-          Send
-        </button>
+>
+  {loading
+    ? "Generating..."
+    : "Send"}
+</button>
 
       </div>
 
