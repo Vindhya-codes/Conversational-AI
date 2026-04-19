@@ -185,9 +185,57 @@ function App() {
             Response
           </h3>
 
-          <p>
-            {reply}
-          </p>
+          <div
+  style={{
+    lineHeight: "1.6"
+  }}
+>
+  {reply
+    .split("\n")
+    .map((line, index) => {
+
+      if (
+        line.startsWith("- ")
+      ) {
+        return (
+          <li key={index}>
+            {line.replace(
+              "- ",
+              ""
+            )}
+          </li>
+        );
+      }
+
+      if (
+        line.match(
+          /^[0-9]+\./
+        )
+      ) {
+        return (
+          <li key={index}>
+            {line}
+          </li>
+        );
+      }
+
+      if (
+        line.endsWith(":")
+      ) {
+        return (
+          <h4 key={index}>
+            {line}
+          </h4>
+        );
+      }
+
+      return (
+        <p key={index}>
+          {line}
+        </p>
+      );
+    })}
+</div>
 
         </div>
 
