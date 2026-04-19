@@ -9,3 +9,7 @@ Backend:
 Frontend:
 1. Created bun vite frontend
 2. Developed the UI for the user to interact with the assistant and take responses
+
+Deployment:
+1. Prepared backend for serverless deployment
+2. Installed and configured Vercel CLI
