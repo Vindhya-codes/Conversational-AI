@@ -1,12 +1,12 @@
-Conversational AI Web Assistant (Full-Stack)
+**Conversational AI Web Assistant (Full-Stack)
 Project Overview
-
+**
 This project is a full-stack conversational AI web application that allows users to interact with an AI assistant through a clean browser interface. The system accepts a user query, forwards it to an AI model via API, and displays the generated response in real time.
 
 The backend integrates the Groq API (llama-3.1-8b-instant model) and stores interactions in MongoDB Atlas, while the frontend provides a responsive React-based interface for user interaction.
 
-This project demonstrates:
-
+**This project demonstrates:
+**
 full-stack architecture design
 serverless API deployment
 cloud database integration
@@ -23,39 +23,39 @@ Cloud database connectivity
 Tech Stack Explanation
 Frontend
 
-Built using:
-
+**Built using:
+**
 React
 Vite
 Bun (package/runtime manager)
 TypeScript
 CSS
 
-Responsibilities:
-
+**Responsibilities:
+**
 Accept user input
 Send POST requests to backend API
 Display structured AI responses
 Backend
 
-Built using:
-
+**Built using:
+**
 Node.js
 Express.js
 Bun runtime
 TypeScript
 Groq SDK
 
-Responsibilities:
-
+**Responsibilities:
+**
 Accept API requests
 Forward prompts to Groq model
 Return generated responses
 Store conversation data in MongoDB
 Database
 
-Database used:
-
+**Database used:
+**
 MongoDB Atlas (Cloud-hosted NoSQL database)
 
 Stores:
@@ -66,43 +66,25 @@ Stores:
 }
 AI Model
 
-Provider:
-
+**Provider:
+**
 Groq API
+Database used:
 
-Model:
-
+**Model:
+**
 llama-3.1-8b-instant
 
-Capabilities:
-
+**Capabilities:
+**
 fast inference
 natural conversation responses
 free-tier accessible
 optimized latency
-Project Folder Structure
-conv_ai/
-│
-├── backend/
-│   ├── api/
-│   │   └── chat.ts
-│   ├── config/
-│   │   └── db.ts
-│   ├── models/
-│   │   └── Chat.ts
-│   ├── routes/
-│   │   └── chat.ts
-│   ├── index.ts
-│   └── vercel.json
-│
-├── frontend/
-│   ├── src/
-│   │   └── App.tsx
-│   └── index.html
-│
-└── README.md
-Setup Instructions
 
+
+**Setup Instructions
+**
 Follow these steps to run the project locally.
 
 1. Clone repository
@@ -177,14 +159,14 @@ API Flow
 Frontend → Express Backend → Groq API
                       ↓
                   MongoDB Atlas
-Deployment Steps
-
+**Deployment Steps
+**
 The application is deployed using serverless backend architecture.
 
-Backend Deployment (Vercel)
-
-Steps followed:
-
+**Backend Deployment (Vercel)
+**
+**Steps followed:
+**
 Converted Express routes into serverless API format
 Added vercel.json
 Installed Vercel CLI
