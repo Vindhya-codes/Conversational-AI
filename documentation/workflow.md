@@ -5,3 +5,4 @@ Backend:
 4. Connected mongoDB and tested it
 5. Created the database with fields userMessage and aiResponse
 6. Chat messages are stored in the database and tested /chat API endpoint
+7. Created bun vite frontend
