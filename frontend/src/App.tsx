@@ -99,14 +99,18 @@ function App() {
       >
 
         <input
-          type="text"
-          placeholder="Ask your question..."
-          value={message}
-          onChange={(e) =>
-            setMessage(
-              e.target.value
-            )
+        type="text"
+        placeholder="Ask your question..."
+        value={message}
+        onChange={(e) =>
+          setMessage(e.target.value)
+        }
+        onKeyDown={(e) => {
+          if (e.key === "Enter") {
+            sendMessage();
           }
+        }}
+  disabled={loading}
           style={{
             width: "100%",
             padding:
