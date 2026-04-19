@@ -1,121 +1,196 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState } from "react";
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [message, setMessage] =
+    useState("");
+
+  const [reply, setReply] =
+    useState("");
+
+  const [loading, setLoading] =
+    useState(false);
+
+  const sendMessage = async () => {
+
+    if (!message.trim()) return;
+
+    setLoading(true);
+    setReply("");
+
+    try {
+
+      const response =
+        await fetch(
+          "http://localhost:5000/chat",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type":
+                "application/json"
+            },
+            body: JSON.stringify({
+              message: message
+            })
+          }
+        );
+
+      const data =
+        await response.json();
+
+      setReply(data.reply);
+
+    } catch {
+
+      setReply(
+        "Error contacting server"
+      );
+
+    }
+
+    setLoading(false);
+
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
+
+    <div
+      style={{
+        minHeight: "100vh",
+        background:
+          "#f4f6f8",
+        display: "flex",
+        flexDirection:
+          "column",
+        alignItems:
+          "center",
+        justifyContent:
+          "center",
+        fontFamily:
+          "Arial, sans-serif"
+      }}
+    >
+
+      {/* Title */}
+
+      <h1
+        style={{
+          marginBottom:
+            "20px"
+        }}
+      >
+        AI Assistant
+      </h1>
+
+      {/* Input Card */}
+
+      <div
+        style={{
+          background:
+            "white",
+          padding:
+            "30px",
+          borderRadius:
+            "12px",
+          boxShadow:
+            "0px 4px 12px rgba(0,0,0,0.1)",
+          width: "420px"
+        }}
+      >
+
+        <input
+          type="text"
+          placeholder="Ask your question..."
+          value={message}
+          onChange={(e) =>
+            setMessage(
+              e.target.value
+            )
+          }
+          style={{
+            width: "100%",
+            padding:
+              "12px",
+            borderRadius:
+              "8px",
+            border:
+              "1px solid #ccc",
+            marginBottom:
+              "15px"
+          }}
+        />
+
         <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+          onClick={
+            sendMessage
+          }
+          style={{
+            width: "100%",
+            padding:
+              "12px",
+            background:
+              "#2c3e50",
+            color: "white",
+            border: "none",
+            borderRadius:
+              "8px",
+            cursor: "pointer"
+          }}
         >
-          Count is {count}
+          Send
         </button>
-      </section>
 
-      <div className="ticks"></div>
+      </div>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      {/* Response Card */}
+
+      {loading && (
+
+        <p
+          style={{
+            marginTop:
+              "20px"
+          }}
+        >
+          Generating response...
+        </p>
+
+      )}
+
+      {reply && (
+
+        <div
+          style={{
+            marginTop:
+              "25px",
+            background:
+              "white",
+            padding:
+              "25px",
+            borderRadius:
+              "12px",
+            width: "420px",
+            boxShadow:
+              "0px 4px 12px rgba(0,0,0,0.1)"
+          }}
+        >
+
+          <h3>
+            Response
+          </h3>
+
+          <p>
+            {reply}
+          </p>
+
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      )}
+
+    </div>
+
+  );
+
 }
 
-export default App
+export default App;
